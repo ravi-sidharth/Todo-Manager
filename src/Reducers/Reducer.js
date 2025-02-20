@@ -41,12 +41,13 @@ export const todoReducers = createSlice({
       localStorage.setItem('filterTodos', JSON.stringify(state.filterTodos));
     },
     editingTodo: (state, action) => {
-      const { editingIndex, newTitle, newDescription, newPriority } = action.payload;
+      const { _id, editingIndex, newTitle, newDescription, newPriority } = action.payload;
       // todo edit task 
       state.todos = state.todos.map((todo, index) => {
         if (index === editingIndex) {
           return {
             ...todo,
+            _id:_id,
             title: newTitle || todo.title,
             description: newDescription || todo.description,
             priority: newPriority || todo.priority,

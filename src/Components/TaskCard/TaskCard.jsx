@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   editingTodo,
@@ -7,10 +7,7 @@ import {
 } from "../../Reducers/Reducer";
 
 const TaskCard = () => {
-  const { todos, filterTodos } = useSelector((state) => state.todos);
-  
-  console.log("todos",todos)
-  console.log("filter todos",filterTodos)
+  const { filterTodos } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   let [currentPage, setCurrentPage] = useState(1);
@@ -36,9 +33,42 @@ const TaskCard = () => {
     setTaskStatus(e.target.value);
   };
 
-  useEffect(() => {
-    
-  }, [taskStatus]);
+  const handleEditTask = (todo,index) => {
+    let flag = true;
+    const newTitle = prompt("Enter new title:", todo.title);
+    const newDescription = prompt(
+      "Enter new description:",
+      todo.description
+    );
+    let newPriority = prompt(
+      "Enter new priority level:",
+      todo.priority
+    );
+    while (flag){
+      if (
+        newPriority === "Low" ||
+        newPriority === "Medium" ||
+        newPriority === "High"
+      ) {
+        dispatch(
+          editingTodo({
+            _id: Date.now(),
+            editingIndex: index,
+            newTitle,
+            newDescription,
+            newPriority,
+          })
+        );
+        flag = false
+      } else {
+        alert("Your priority level should be Easy, Medium or High, Please try again!")
+        newPriority = prompt(
+          "Enter new priority level:",
+          todo.priority
+        );
+      }
+    }
+  }
 
   return (
     <>
@@ -76,7 +106,7 @@ const TaskCard = () => {
         </button>
       </div>
 
-      <div className="flex gap-5 mt-5 ">
+      <div className="flex gap-5 m-10">
         {filterTodos && filterTodos.length > 0 ? (
             filterTodos.slice(start, end).map((todo, index) => (
             <div key={todo._id}>
@@ -99,40 +129,7 @@ const TaskCard = () => {
               <button
                 className="text-white p-1 bg-yellow-700 rounded-lg mr-2"
                 onClick={() => {
-                  let flag = true;
-                  const newTitle = prompt("Enter new title:", todo.title);
-                  const newDescription = prompt(
-                    "Enter new description:",
-                    todo.description
-                  );
-                  let newPriority = prompt(
-                    "Enter new priority level:",
-                    todo.priority
-                  );
-                  while (flag){
-                    if (
-                      newPriority === "Low" ||
-                      newPriority === "Medium" ||
-                      newPriority === "High"
-                    ) {
-                      dispatch(
-                        editingTodo({
-                          _id: Date.now(),
-                          editingIndex: index,
-                          newTitle,
-                          newDescription,
-                          newPriority,
-                        })
-                      );
-                      flag = false
-                    } else {
-                      alert("Your priority level should be Easy, Medium or High, Please try again!")
-                      newPriority = prompt(
-                        "Enter new priority level:",
-                        todo.priority
-                      );
-                    }
-                  }
+                  handleEditTask(todo,index)
                 }}
               >
                 Edit
@@ -159,7 +156,7 @@ const TaskCard = () => {
             </div>
           ))
         ) : (
-          <p>No tasks available.</p>
+          <p className="text-2xl font-bold">No tasks found!.....</p>
         )}
       </div>
     </>

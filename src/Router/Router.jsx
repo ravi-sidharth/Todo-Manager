@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "../Router/Layout";
-import TaskGenerator from "../../Components/TaskGenerator/TaskGeneratorForm";
-import TaskCard from "../../Components/TaskCard/TaskCard";
+import Layout from "./Layout";
+import TaskGenerator from "../Components/TaskGenerator/TaskGeneratorForm";
+import TaskCard from "../Components/TaskCard/TaskCard";
 
-const Root = () => {
+const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -15,4 +15,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default Router;

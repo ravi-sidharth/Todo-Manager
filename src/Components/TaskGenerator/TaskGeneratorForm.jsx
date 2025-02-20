@@ -1,10 +1,9 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { addTodo } from "../../Reducers/Reducer";
 
 const TaskGenerator = () => {
-  const { todos } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm();
 
@@ -12,7 +11,7 @@ const TaskGenerator = () => {
     if (data.title.trim()) {
       data._id = Date.now()
       dispatch(addTodo(data));
-      console.log(data)
+      alert("Successfully add the task")
     } else {
       alert("This is invalid syntax, Please try again with valid syntax!");
     }

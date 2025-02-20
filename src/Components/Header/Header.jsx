@@ -6,13 +6,16 @@ const Header = () => {
   return (
     <div className="h-[100px] p-10 flex justify-between items-center bg-zinc-400 text-white">
       <div className="flex justify-center items-center">
-        <div className="text-2xl font-semibold" >Task Management App</div>
+        <div className="text-4xl font-semibold text-zinc-800">
+          Task Management App
+        </div>
       </div>
       <div className="flex gap-5 text-xl text-white font-bold">
-        <NavLink to="/" >Add Task</NavLink>
+        <NavLink to="/">Add Task</NavLink>
         <NavLink to="/view-task">View Task</NavLink>
         <TaskFilter/>
-      
+    
+        
       </div>
       <div>
         <form className="max-w-md mx-auto">

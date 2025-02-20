@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import {
   priorityWiseTaskFilter,
   statusWiseTaskFilter,
   AllTask,
   
 } from "../../Reducers/Reducer";
+import { useNavigate } from "react-router-dom";
 
 const TaskFilter = () => {
-  const {filterTodos,todos} = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
 
   const handleTaskFilter = (e) => {
+    navigate('/view-task')
     if (e.target.value === "All") { 
       dispatch(AllTask(e.target.value))
 
@@ -29,16 +31,14 @@ const TaskFilter = () => {
   };
 
   return (
-    <div className="">
-      <select id="filter"  className="outline-none " defaultValue="All" onChange={handleTaskFilter}>
-        <option className="bg-gray-500"  value="All">
-          Task Filter
-        </option>
-        <option className="bg-gray-500" value="Low">Low Priority Task</option>
-        <option className="bg-gray-500" value="Medium">Medium Priority Task</option>
-        <option className="bg-gray-500" value="High">High Priority Task</option>
-        <option className="bg-gray-500" value="Pending">Pending Task</option>
-        <option className="bg-gray-500" value="In Progress">In Progress Task</option>
+    <div>
+      <select className="outline-none " defaultValue="All" onChange={handleTaskFilter}>
+        <option className="bg-gray-500"  value="All">Task Filter</option>
+        <option className="bg-gray-500" value="Low">Low Priority Tasks</option>
+        <option className="bg-gray-500" value="Medium">Medium Priority Tasks</option>
+        <option className="bg-gray-500" value="High">High Priority Tasks</option>
+        <option className="bg-gray-500" value="Pending">Pending Tasks</option>
+        <option className="bg-gray-500" value="In Progress">In Progress Tasks</option>
         <option className="bg-gray-500" value="Completed">Completed Tasks</option>
       </select>
     </div>
