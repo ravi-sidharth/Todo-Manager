@@ -61,7 +61,7 @@ const TaskCard = () => {
         );
         flag = false
       } else {
-        alert("Your priority level should be Easy, Medium or High, Please try again!")
+        alert("Your priority level should be Low, Medium or High, Please try again!")
         newPriority = prompt(
           "Enter new priority level:",
           todo.priority

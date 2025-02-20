@@ -31,7 +31,6 @@ export const todoReducers = createSlice({
     },
     statusTodo: (state, action) => {
       const { taskStatus, id } = action.payload
-
       // task status in todos
       state.todos = state.todos.map((todo) => todo._id == id ? { ...todo, status: taskStatus || todo.status } : todo);
       localStorage.setItem('todos', JSON.stringify(state.todos));
@@ -62,6 +61,7 @@ export const todoReducers = createSlice({
         if (index === editingIndex) {
           return {
             ...todo,
+            _id:_id,
             title: newTitle || todo.title,
             description: newDescription || todo.description,
             priority: newPriority || todo.priority,
